@@ -2,6 +2,7 @@
 ## SSH
 module "ssh_sg" {
   source = "terraform-aws-modules/security-group/aws"
+  version = "2.17.0"
 
   name        = "ssh"
   description = "Security group for SSH-in and egress"
@@ -24,6 +25,7 @@ module "ssh_sg" {
 ## Chef Automate & Chef Server/Chef HA Frontends
 module "https_all_sg" {
   source = "terraform-aws-modules/security-group/aws"
+  version = "2.17.0"
 
   name        = "https"
   description = "Security group for HTTPS-in from all to all"
@@ -46,6 +48,7 @@ module "https_all_sg" {
 ## Backend
 module "backend_sg" {
   source = "terraform-aws-modules/security-group/aws"
+  version = "2.17.0"
 
   create = "${var.create_chef_ha ? true : false}"
 

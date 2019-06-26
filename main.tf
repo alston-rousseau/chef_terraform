@@ -1,6 +1,6 @@
 provider "aws" {
-  region  = "${var.provider["region"]}"
   profile = "${var.provider["profile"]}"
+  region  = "${var.provider["region"]}"
 }
 
 locals {
@@ -37,6 +37,8 @@ data "aws_route53_zone" "zone" {
 # https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/1.37.0
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
+  version = "1.66.0"
+
 
   name = "${local.deployment_name}"
   cidr = "${var.vpc["cidr_block"]}"

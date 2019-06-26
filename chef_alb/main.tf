@@ -94,6 +94,7 @@ resource "aws_route53_record" "automate_alb" {
 
 module "alb" {
   source              = "terraform-aws-modules/alb/aws"
+  version = "3.5.0"
   load_balancer_name  = "${replace(local.chef_alb_fqdn,".","-")}-alb"
   security_groups     = ["${var.https_security_group_id}"]
   log_bucket_name     = "${aws_s3_bucket.alb_logs.bucket}"
