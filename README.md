@@ -85,3 +85,24 @@ https://docs.chef.io/install_bootstrap.html#unattended-installs
   * `aws ssm put-parameter --name "chef_validator" --type "SecureString" --overwrite --value "$(cat validator.pem)"`
 * `chef_unattended_registration` includes IAM config for allowing EC2 instances access to the validator key in SSM
 * `chef_clients` includes an example of unattended node registration. `chef_clients.count` variable controls how many clients are deployed.
+
+## Alston's Notes
+
+Sorry this is a little late and sloppy. I got distracted configuring and testing the Chef HA terraform module. I also do not have access to Roblox JIRA or cannot find my credentials?  Most of these tasks can be run simultaneously by separate engineers with the exception of the knife validation. 
+
+Chef does not recommend multi region HA due to the need for 1.5ms latency. This code does support multi-AZ HA and it's tested working. However - the below process is repeatable and allows for multiple chef environments if node configuration latency is an issue for some reason. 
+
+Engineers developing this system need root access to front/backend servers once deployed until configuration is complete. 
+
+Current Chef HA module for terraform requires Route 53 domain and Certificate Manager. Might need to modify for customer but it's beautiful written terraform 11 code. It's open sourced for commercial use. 
+
+
+* Determine Custom Route 53 domain to use for Chef
+* Fork https://github.com/alston-rousseau/chef_terraform to FogSource
+* Upgrade https://github.com/alston-rousseau/chef_terraform to terraform 12 if desired
+* Remove VPC module from chef_terraform repo and configure to use standard fog source module
+* Aquire Chef Automate License and save in ./ root of module
+* Separate the ./chef_alb module so that the ACM or Certificate creation process for the ALB does not stall the rest of the deployment
+* Codify Chef HA frontend and backend manual config. (See readme and customize to customer needs)
+* If desired automate unattended node registration using AWS SSM Parameter Store 
+* Knife validation using knife.rb 
