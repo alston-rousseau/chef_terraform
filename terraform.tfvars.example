@@ -1,6 +1,6 @@
 provider = {
-  region  = "eu-west-1"
-  profile = "profilename"
+  region  = "us-east-1"
+  profile = "default"
 }
 
 application_name = "My Chef Automate"
@@ -13,7 +13,7 @@ chef_clients = {
 
 default_tags = {
   X-Dept        = "My Dept"
-  X-Contact     = "My Name"
+  X-Contact     = "alston@foghornconsulting.com"
   X-Project     = "Demo"
   X-Production  = false
   X-TTL         = 168
@@ -26,14 +26,14 @@ vpc = {
 }
 
 az_subnets = {
-  eu-west-1a = "10.0.0.0/27"
-  eu-west-1b = "10.0.0.32/27"
-  eu-west-1c = "10.0.0.64/27"
+  us-east-1a = "10.0.0.0/27"
+  us-east-1b = "10.0.0.32/27"
+  us-east-1c = "10.0.0.64/27"
 }
 
 ssh_whitelist_cidrs = ["0.0.0.0/0"]
 
-domain = "example.com"
+domain = "customdomain.com"
 
 hostnames = {
   chef_server     = "chef"
